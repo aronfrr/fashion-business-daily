@@ -42,6 +42,20 @@ industry responsibility topics.
    A dated Markdown file (for example `daily_digest_2025_10_25.md`) will be
    generated inside the chosen output directory.
 
+   To publish a live dashboard on GitHub Pages, generate the static site assets
+   into a `docs/` folder (the location GitHub Pages can serve from):
+
+   ```bash
+   fashion-business-daily --output data --site-output docs
+   ```
+
+   Commit the `docs/` directory, then enable Pages in your repository settings
+   and choose the `main` branch with the `/docs` folder.
+
+   For fully automated updates, add a scheduled GitHub Actions workflow that
+   runs the same command, commits the refreshed digest and site, and pushes the
+   changes back to your repository.
+
 ## Customising sources
 
 The tool ships with a default list of trusted publications. If you want to add

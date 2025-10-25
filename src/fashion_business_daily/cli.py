@@ -9,6 +9,7 @@ from pathlib import Path
 from .aggregator import NewsAggregator
 from .config import load_categories, load_sources
 from .report import build_markdown_digest, write_digest
+from .site import build_site_assets, write_site
 
 LOGGER = logging.getLogger(__name__)
 
@@ -20,6 +21,13 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path("data"),
         help="Directory to store generated daily digest files (default: data)",
+    )
+    parser.add_argument(
+        "--site-output",
+        type=Path,
+        help=(
+            "Optional directory to write a static website (e.g. docs for GitHub Pages)"
+        ),
     )
     parser.add_argument(
         "--max-items",
@@ -56,6 +64,13 @@ def main(argv: list[str] | None = None) -> int:
     digest = build_markdown_digest(articles)
     output_path = write_digest(digest, args.output)
     LOGGER.info("Digest written to %s", output_path)
+
+    if args.site_output:
+        site_dir = write_site(
+            build_site_assets(articles),
+            args.site_output,
+        )
+        LOGGER.info("Static site written to %s", site_dir)
 
     return 0
 
