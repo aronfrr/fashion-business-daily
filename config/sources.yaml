@@ -1,0 +1,10 @@
+# Optional configuration for Fashion Business Daily sources.
+# Uncomment and adjust to override the default list of feeds.
+#
+# sources:
+#   - name: "Business of Fashion"
+#     type: "rss"
+#     url: "https://www.businessoffashion.com/rss"
+#   - name: "New York Times Fashion"
+#     type: "nyt_topstories"
+#     section: "fashion"
